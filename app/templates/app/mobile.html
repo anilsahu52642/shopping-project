@@ -1,0 +1,32 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+  <div class="col-sm-3">
+   <a href="{% url 'mobile' %}" class="btn btn-outline-secondary d-grid">All Mobile</a>
+   <a href="{% url 'mobile' 'oppo' %}" class="btn btn-outline-secondary d-grid my-3">Oppo</a>
+   <a href="{% url 'mobile' 'samsung' %}" class="btn btn-outline-secondary d-grid my-3">Samsung</a>
+   <a href="{% url 'mobile' 'below' %}" class="btn btn-outline-secondary d-grid my-3">Below 15000</a>
+   <a href="{% url 'mobile' 'above' %}" class="btn btn-outline-secondary d-grid my-3">Above 15000</a>
+
+  </div>
+  <div class="col-sm-8 offset-sm-1">
+      <div class="card-group">
+           {% for am in allmobile %}
+
+           <div class="card-sm-3">
+            <div class="card-body">
+              <span><a href="{% url 'product-detail' am.pk %}"><img src="{{am.product_image.url}}" height="250" width="200"><br><h6 class="text-center text-dark">Price: {{am.discount_price}}<br><p class="text-decoration-line-through">{{am.selling_price}}</p></h6></a></span>
+               <!-- <span><img src="{{am.product_image.url}}" class='img' height="250" width="200"><br><h6 class="text-center">Price: {{am.discount_price}}<br><p class="text-decoration-line-through">{{am.selling_price}}</p></h6></span> -->
+            </div>
+            </div>
+           {% endfor %}
+      </div>
+
+
+  </div>
+ </div>
+</div>
+{% endblock main-content %}

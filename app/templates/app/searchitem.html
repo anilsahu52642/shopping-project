@@ -1,0 +1,34 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}search item{% endblock title %}
+{% block main-content %}
+  {% if searchitem %}
+<div class="container my-5">
+  <div class="card-group">
+    {% for si in searchitem %}
+    <div class="card-sm-3">
+    <div class="card-body">
+      <span><a href="{% url 'product-detail' si.pk %}" class='btn btn-outline-secondary shadow p-3'><img src={{si.product_image.url}} width="200" height="200"></a><br><h5 class='text-center'>{{si.title}}<br>{{si.discount_price}}</h5></span>
+    </div>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+  {% else %}
+  <div class="container my-3">
+  Your search - <br><b>{{searchcontent}}</b> <br>- did not match any documents.
+  Suggestions:
+  <ul>
+    <li>Make sure that all words are spelled correctly.</li>
+    <li>Try different keywords.</li>
+    <li>Try more general keywords.</li>
+  </ul>
+
+  {% endif %}
+</div>
+
+
+
+{% endblock main-content %}

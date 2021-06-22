@@ -1,0 +1,35 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Login{% endblock title %}
+{% block main-content %}
+<div class="container">
+ <div class="row my-3">
+  <div class="col-sm-6 offset-sm-3">
+   <h3>Login</h3>
+   <hr>
+
+   <form action="" method="post" novalidate class="shadow p-5">
+    {% csrf_token %}
+    {% for fm in form %}
+    {{fm.label}}
+    <div class="my-1">{{fm}}</div>
+    <span class="text-danger">{{fm.errors|striptags}}</span><br>
+    {% endfor %}
+    <a href="{% url 'reset_password' %}">forgot password</a>
+
+
+    <div class="text-end"><input type="submit" value="Signin" class="btn btn-primary"></div>
+    <div class="text-center text-success fw-bold"><small>Not a User?<a href="{% url 'customerregistration' %}">SignUp</a></small></div>
+    {% if form.non_field_errors %}
+    {% for e in form.non_field_errors %}
+    <small class="text-danger">{{e}}</small>
+    {% endfor %}
+    {% endif %}
+
+   </form>
+  <a href="{% url 'social:begin' 'facebook' %}" class='btn btn-primary my-2 d-grid'>Login using Facebook</a>
+  </div>
+ </div>
+</div>
+
+{% endblock main-content %}
